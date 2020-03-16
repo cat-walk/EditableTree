@@ -213,7 +213,7 @@ const initialData = {
   ],
 };
 
-const SearchTree = props => {
+const EditableTree = props => {
   const [treeData, setTreeData] = useState(initialData);
   recursiveGetTreeAllKey(treeData);
   const [expandedKeys, setExpandedKeys] = useState(allKey);
@@ -279,4 +279,5 @@ const SearchTree = props => {
     </div>
   );
 };
-export default SearchTree;
+
+export default EditableTree;
