@@ -5,7 +5,7 @@ import {
   PlusCircleOutlined,
   MinusCircleOutlined,
 } from '@ant-design/icons';
-import './EditableTree.style.less';
+import './EditableTree.style.scss';
 
 const { Search } = Input;
 
@@ -274,7 +274,7 @@ const SearchTree = props => {
   const handleSearch = () => {};
 
   return (
-    <div>
+    <div className="demo-container">
       <p className="list-title">房屋列表</p>
       <div className={props.className + ' search-tree'}>
         <Search

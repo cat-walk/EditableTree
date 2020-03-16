@@ -1,6 +1,10 @@
-@smFs: 12px;
-@mdFs: 14px;
-@lgFs: 16px;
+$smFs: 12px;
+$mdFs: 14px;
+$lgFs: 16px;
+
+.demo-container {
+  width: 200px;
+}
 
 .search-tree {
   margin: 0 25px 0 0;
@@ -16,7 +20,7 @@
   }
 
   .ant-tree {
-    font-size: @lgFs;
+    font-size: $lgFs;
   }
   .ant-tree li ul {
     margin-left: -10px;
@@ -65,7 +69,7 @@
     }
     .tree-node {
       width: 140px;
-      font-size: @mdFs;
+      font-size: $mdFs;
     }
   }
 }
@@ -79,11 +83,11 @@
     }
     .tree-node {
       width: 134px;
-      font-size: @smFs;
+      font-size: $smFs;
 
       .tree-icon {
         margin-right: 3px;
-        font-size: @smFs;
+        font-size: $smFs;
       }
     }
   }
