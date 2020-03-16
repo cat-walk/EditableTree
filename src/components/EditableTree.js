@@ -76,6 +76,21 @@ const recursiveEditNode = (treeData, newNodeData) => {
   }
 };
 
+let allKey = [];
+const recursiveGetTreeAllKey = (node, notIncludeSelf) => {
+  if (!notIncludeSelf) {
+    allKey.push(node.key);
+  }
+  if (node.children.length > 0) {
+    node.children.forEach(item => {
+      allKey.push(item.key);
+      recursiveGetTreeAllKey(item, true);
+    });
+  }
+
+  return allKey;
+};
+
 const EditableNode = props => {
   const {
     treeData,
@@ -181,33 +196,18 @@ const EditableNode = props => {
   );
 };
 
-let allKey = [];
-const recursiveGetTreeAllKey = (node, notIncludeSelf) => {
-  if (!notIncludeSelf) {
-    allKey.push(node.key);
-  }
-  if (node.children.length > 0) {
-    node.children.forEach(item => {
-      allKey.push(item.key);
-      recursiveGetTreeAllKey(item, true);
-    });
-  }
-
-  return allKey;
-};
-
 const initialData = {
   key: '0-0',
-  title: '北京六视花园小区',
+  title: '中国',
   children: [
     {
       key: '0-0-0',
-      title: '一单元',
-      children: [{ key: '0-1-1', title: '101室', children: [] }],
+      title: '北京',
+      children: [{ key: '0-0-0-0', title: '朝阳区', children: [] }],
     },
     {
       key: '0-0-1',
-      title: '二单元',
+      title: '上海',
       children: [],
     },
   ],
