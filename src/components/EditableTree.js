@@ -1,13 +1,11 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import { Tree, Input, Modal, Popconfirm, Tooltip } from 'antd';
+import { Tree, Popconfirm } from 'antd';
 import {
   EditOutlined,
   PlusCircleOutlined,
   MinusCircleOutlined,
 } from '@ant-design/icons';
 import './EditableTree.style.scss';
-
-const { Search } = Input;
 
 const recursiveAddNode = (treeData, newNode) => {
   const { key } = newNode;
@@ -162,9 +160,7 @@ const EditableNode = props => {
         ></input>
       ) : (
         <>
-          <Tooltip placement="topLeft" title={inputValue}>
-            <span className="title ellipsis-one-line">{inputValue}</span>
-          </Tooltip>
+          <span className="title ellipsis-one-line">{inputValue}</span>
           <span className="edit-btn-container">
             <EditOutlined className="tree-icon" onClick={handleEdit} />
             <PlusCircleOutlined className="tree-icon" onClick={handleAdd} />
@@ -185,31 +181,12 @@ const EditableNode = props => {
   );
 };
 
-const initialData = [
-  {
-    key: '0-0',
-    title: '北京六视花园小区',
-    children: [
-      {
-        key: '0-0-0',
-        title: '一单元',
-        children: [{ key: '0-1-1', title: '101室', children: [] }],
-      },
-      {
-        key: '0-0-1',
-        title: '二单元',
-        children: [],
-      },
-    ],
-  },
-];
-
 let allKey = [];
 const recursiveGetTreeAllKey = (node, notIncludeSelf) => {
   if (!notIncludeSelf) {
     allKey.push(node.key);
   }
-  if (node.children && node.children.length > 0) {
+  if (node.children.length > 0) {
     node.children.forEach(item => {
       allKey.push(item.key);
       recursiveGetTreeAllKey(item, true);
@@ -217,6 +194,23 @@ const recursiveGetTreeAllKey = (node, notIncludeSelf) => {
   }
 
   return allKey;
+};
+
+const initialData = {
+  key: '0-0',
+  title: '北京六视花园小区',
+  children: [
+    {
+      key: '0-0-0',
+      title: '一单元',
+      children: [{ key: '0-1-1', title: '101室', children: [] }],
+    },
+    {
+      key: '0-0-1',
+      title: '二单元',
+      children: [],
+    },
+  ],
 };
 
 const SearchTree = props => {
@@ -256,14 +250,14 @@ const SearchTree = props => {
   });
 
   const handleExpand = (expandedKeys, { expanded, node }) => {
-    console.log(expandedKeys, treeData, 'treeData');
+    // console.log(expandedKeys, treeData, 'treeData');
     // if (expanded) {
     //   expandedKeys.push(node.props.eventKey);
     // } else {
     //   expandedKeys.splice(expandedKeys.indexOf(node.props.eventKey), 1);
     // debugger
     setExpandedKeys([...expandedKeys]);
-    console.log(expandedKeys, treeData, 'treeData');
+    // console.log(expandedKeys, treeData, 'treeData');
 
     // }
   };
@@ -271,28 +265,17 @@ const SearchTree = props => {
   const treeHtml = useMemo(() => {
     return iteraGetTreeHtml(treeData);
   }, [iteraGetTreeHtml, treeData]);
-  const handleSearch = () => {};
 
   return (
     <div className="demo-container">
-      <p className="list-title">房屋列表</p>
-      <div className={props.className + ' search-tree'}>
-        <Search
-          style={{ marginBottom: 8 }}
-          placeholder="请输入楼栋/门牌号"
-          onChange={handleSearch}
-        />
-        <div className="tree-wrapper">
-          <Tree
-            showIcon
-            defaultExpandAll
-            draggable
-            expandedKeys={expandedKeys}
-            treeData={treeHtml}
-            onExpand={handleExpand}
-          />
-        </div>
-      </div>
+      <Tree
+        showIcon
+        defaultExpandAll
+        draggable
+        expandedKeys={expandedKeys}
+        treeData={treeHtml}
+        onExpand={handleExpand}
+      />
     </div>
   );
 };
