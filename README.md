@@ -11,4 +11,4 @@
 参考 `src/components/EditableTree.js`的代码。
 主要是四个递归函数，以及一个 EditableNode 组件。
 
-![image info](./public/code-structure.png)
+<img src="./public/code-structure.png"  width="250"/>
